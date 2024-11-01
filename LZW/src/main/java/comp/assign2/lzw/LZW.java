@@ -50,9 +50,9 @@ public class LZW {
             }
         }
 
-        public static void WriteString(String outputtxt) {
+        public static void WriteString(String outputtxt, String path) {
             try {
-                File output = new File("src/output.txt");
+                File output = new File("src/" + path);
                 output.createNewFile();
 
                 FileWriter outputWriter = new FileWriter(output);
@@ -117,25 +117,34 @@ public class LZW {
 
             compress(txtTOCompress);
 
-            for(int i = 0; i < tags.size(); i++) {
-                if(tags.get(i)+65 > 100) {
-                    System.out.println(tags.get(i)+65+11);
-                } else {
-                    System.out.println(tags.get(i)+65);
-                }
-                
-            }
-
-            System.out.println("-----------------------");
-
-            for(int i = 52; i < dec.size(); i++) {
-                System.out.println(dec.get(i));
-            }
+            // for(int i = 0; i < tags.size(); i++) {
+            //     if(tags.get(i)+65 > 100) {
+            //         System.out.println(tags.get(i)+65+11);
+            //     } else {
+            //         System.out.println(tags.get(i)+65);
+            //     }
+            // }
+            // System.out.println("-----------------------");
+            // for(int i = 52; i < dec.size(); i++) {
+            //     System.out.println(dec.get(i));
+            // }
             
+            String PrintString = "";
+            for (Integer tag : tags) {
+                PrintString += tag.toString() + "\n";
+            }
+            WriteString(PrintString, "tagsOutput.txt");
+
+            PrintString = "";
+            for (String dec : dec) {
+                PrintString += dec + "\n";
+            }
+            WriteString(PrintString, "decOutput.txt");
+
             // dec.clear();
             // fillDec();
 
             // String decompressedtxt = decompress();
-            // WriteString(decompressedtxt);
+            // WriteString(decompressedtxt, "DecompressedOutput.txt");
     }
 }
