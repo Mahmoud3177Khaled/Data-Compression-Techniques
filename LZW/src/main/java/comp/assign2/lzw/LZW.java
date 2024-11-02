@@ -14,10 +14,10 @@ import java.util.Scanner;
 
 public class LZW {
 
-    private static ArrayList<String> dec = new ArrayList<>();
+    private static ArrayList<String> dic = new ArrayList<>();
     private static ArrayList<Integer> tags = new ArrayList<>();
     
-        private static void fillDec() {
+        private static void fillDic() {
                 for(int i = 65; i < 123; i++) {
 
                     if (i > 90 && i <= 96) {
@@ -26,11 +26,11 @@ public class LZW {
 
                     String letter = "";
                     letter += ((char)i);
-                    dec.add(letter);
+                    dic.add(letter);
             }
     
             // for(int i = 0; i < 52; i++) {
-            //     System.out.println(dec.get(i));
+            //     System.out.println(dic.get(i));
             // }
         }
 
@@ -69,50 +69,50 @@ public class LZW {
             int i = 0;
             while (i < txt.length()-1) {
                 int j = 0;
-                int lastmatchLocationInDec = 0;
+                int lastmatchLocationInDic = 0;
                 int matchlength;
                 String searchtxtPart = "";
                 String lastmatchedString = "";
 
                 searchtxtPart += txt.charAt(i+j);
 
-                for (int k = 0; k < dec.size(); k++) {
-                    if (searchtxtPart.equals(dec.get(k))) {
+                for (int k = 0; k < dic.size(); k++) {
+                    if (searchtxtPart.equals(dic.get(k))) {
                         lastmatchedString = searchtxtPart;
 
                         if(i + j + 1 > txt.length()-1) {
-                            lastmatchLocationInDec = k;
+                            lastmatchLocationInDic = k;
                             break;
                         }
 
                         searchtxtPart += txt.charAt(i + ++j);
-                        lastmatchLocationInDec = k;
+                        lastmatchLocationInDic = k;
                         
                     }
                 }
 
                 matchlength = lastmatchedString.length();
                 if ( i+j+1 < txt.length() ) {
-                    dec.add(lastmatchedString + txt.charAt(i+j));
+                    dic.add(lastmatchedString + txt.charAt(i+j));
                     
                 }
-                tags.add(lastmatchLocationInDec);
+                tags.add(lastmatchLocationInDic);
 
                 i += matchlength;
             }
         }
 
-        public static String decompress() {
-            String decompressedtxt = "";
+        public static String dicompress() {
+            String dicompressedtxt = "";
 
-            // decompress here
+            // dicompress here
 
-            return decompressedtxt;
+            return dicompressedtxt;
         }
 
 
         public static void main(String[] args) {
-            fillDec();
+            fillDic();
             String txtTOCompress = readString();
 
             compress(txtTOCompress);
@@ -124,15 +124,15 @@ public class LZW {
             WriteString(PrintString, "tagsOutput.txt");
 
             PrintString = "";
-            for (String dec : dec) {
-                PrintString += dec + "\n";
+            for (String dic : dic) {
+                PrintString += dic + "\n";
             }
-            WriteString(PrintString, "decOutput.txt");
+            WriteString(PrintString, "dicOutput.txt");
 
-            // dec.clear();
-            // fillDec();
+            // dic.clear();
+            // fillDic();
 
-            // String decompressedtxt = decompress();
-            // WriteString(decompressedtxt, "DecompressedOutput.txt");
+            // String dicompressedtxt = dicompress();
+            // WriteString(dicompressedtxt, "DicompressedOutput.txt");
     }
 }
