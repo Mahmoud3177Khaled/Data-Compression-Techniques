@@ -117,18 +117,6 @@ public class LZW {
 
             compress(txtTOCompress);
 
-            // for(int i = 0; i < tags.size(); i++) {
-            //     if(tags.get(i)+65 > 100) {
-            //         System.out.println(tags.get(i)+65+11);
-            //     } else {
-            //         System.out.println(tags.get(i)+65);
-            //     }
-            // }
-            // System.out.println("-----------------------");
-            // for(int i = 52; i < dec.size(); i++) {
-            //     System.out.println(dec.get(i));
-            // }
-            
             String PrintString = "";
             for (Integer tag : tags) {
                 PrintString += tag.toString() + "\n";
